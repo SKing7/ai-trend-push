@@ -1,12 +1,16 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { fireCrawlTask } from './tasks/crontab';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor() {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Get('/api/gen')
+  async ai() {
+    const result = await fireCrawlTask();
+    return {
+      status: 0,
+      data: result,
+    };
   }
 }

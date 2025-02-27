@@ -2,12 +2,9 @@ import {
   ContentScraper,
   ScrapedContent,
 } from '../interfaces/scraper.interface';
-import dotenv from 'dotenv';
 import { z } from 'zod';
 import FirecrawlApp from 'firecrawl';
-const FIRE_CRAWL_API_KEY = process.env.FIRE_CRAWL_API_KEY;
-
-dotenv.config();
+import { getConfigService } from './config';
 
 // 使用 zod 定义数据结构
 const StorySchema = z.object({
@@ -24,13 +21,10 @@ const StoriesSchema = z.object({
 export class FireCrawlScraper implements ContentScraper {
   private app!: FirecrawlApp;
 
-  constructor() {
-    this.refresh();
-  }
-
-  refresh() {
+  init() {
+    const configService = getConfigService();
     this.app = new FirecrawlApp({
-      apiKey: FIRE_CRAWL_API_KEY,
+      apiKey: configService.get('FIRE_CRAWL_API_KEY'),
     });
   }
 
@@ -97,7 +91,7 @@ export class FireCrawlScraper implements ContentScraper {
         title: story.headline,
         content: story.content,
         url: story.link,
-        publishDate: '',
+        publishDate: story.date_posted,
         score: 0,
         metadata: {
           source: 'fireCrawl',

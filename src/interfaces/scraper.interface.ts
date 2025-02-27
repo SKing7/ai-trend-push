@@ -1,6 +1,6 @@
 export interface ContentScraper {
   // 刷新配置
-  refresh(): void;
+  init(): void;
 
   // 抓取指定数据源的内容
   scrape(sourceId: string, options?: ScraperOptions): Promise<ScrapedContent[]>;
