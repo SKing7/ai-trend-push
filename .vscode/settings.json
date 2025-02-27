@@ -1,0 +1,17 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",  // 全局默认格式化工具
+  "editor.formatOnSave": true,                         // 全局启用保存时格式化
+  "editor.tabSize": 2,                                 // Tab 为 2 个空格
+  "editor.insertSpaces": true,                         // 使用空格代替 Tab
+  "editor.detectIndentation": false,                   // 禁用自动检测缩进
+  "prettier.tabWidth": 2,                              // Prettier 使用 2 个空格
+  "prettier.useTabs": false,                           // Prettier 禁用 Tab
+  "[javascript]": {                                    // JavaScript 配置
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {                                    // TypeScript 配置
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  }
+}
