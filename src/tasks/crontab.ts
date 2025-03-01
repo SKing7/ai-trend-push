@@ -6,9 +6,11 @@ export default function () {}
 
 export const fireCrawlTask = async () => {
   const firecrawlClent = new FireCrawlScraper();
+  const source = sourceConfigs.AI.firecrawl;
+
   firecrawlClent.init();
   console.log('Firecrawl task is running');
-  const source = sourceConfigs.AI.firecrawl;
+
   let rt: ScrapedContent[] = [];
   for (const s of source) {
     try {
