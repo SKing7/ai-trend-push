@@ -3,13 +3,14 @@ import {
   ScrapedContent,
 } from '../interfaces/scraper.interface';
 import { z } from 'zod';
-import FirecrawlApp from 'firecrawl';
-import { getConfigService } from './config';
+import FirecrawlApp, { ScrapeResponse } from 'firecrawl';
+import { getConfigService } from '../lib/config';
 
 // 使用 zod 定义数据结构
 const StorySchema = z.object({
   headline: z.string(),
   content: z.string(),
+  digest: z.string(),
   link: z.string(),
   date_posted: z.string(),
 });
@@ -37,12 +38,20 @@ export class FireCrawlScraper implements ContentScraper {
     return `fc_${timestamp}_${random}_${Math.abs(urlHash)}`;
   }
 
+  async crawler(url: string) {
+    const scrapeResult = (await this.app.scrapeUrl(url, {
+      formats: ['html'],
+    })) as ScrapeResponse;
+    return scrapeResult.html;
+  }
+
   async scrape(sourceId: string): Promise<ScrapedContent[]> {
     try {
       const currentDate = new Date().toLocaleDateString();
 
       // 构建提取提示词
       const promptForFirecrawl = `
+        请按照以下prompt 提取 AI 或 LLM 相关的新闻内容，最好是中文或者你把结果翻译成中文
         Return only today's AI or LLM related story or post headlines and links in JSON format from the page content. 
         They must be posted today, ${currentDate}. The format should be:
           {
@@ -51,6 +60,7 @@ export class FireCrawlScraper implements ContentScraper {
                 "headline": "headline1",
                 "content":"content1"
                 "link": "link1",
+                "digest": "content2",
                 "date_posted": "YYYY-MM-DD HH:mm:ss",
               },
               ...
@@ -58,12 +68,9 @@ export class FireCrawlScraper implements ContentScraper {
           }
         If there are no AI or LLM stories from today, return {"stories": []}.
         
-        The source link is ${sourceId}. 
-        If a story link is not absolute, prepend ${sourceId} to make it absolute. 
         Return only pure JSON in the specified format (no extra text, no markdown, no \\\\).  
         The content should be about 500 words, which can summarize the full text and the main point.
-        Translate all into Chinese.
-        !!
+        The digest should be less than 50 words, which can summarize the full text and the main point.
         `;
 
       // 使用 FirecrawlApp 进行抓取
@@ -92,6 +99,7 @@ export class FireCrawlScraper implements ContentScraper {
         content: story.content,
         url: story.link,
         publishDate: story.date_posted,
+        digest: story.digest,
         score: 0,
         metadata: {
           source: 'fireCrawl',

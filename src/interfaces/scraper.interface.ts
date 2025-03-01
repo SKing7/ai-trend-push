@@ -19,6 +19,7 @@ export interface ScrapedContent {
   content: string;
   url: string;
   publishDate: string;
+  digest: string;
   score: number;
   metadata: Record<string, any>;
 }

@@ -16,14 +16,14 @@ type SourceConfig = Record<NewsType, PlatformSources>;
 export const sourceConfigs: SourceConfig = {
   AI: {
     firecrawl: [
-      { identifier: 'https://www.anthropic.com/news' },
-      { identifier: 'https://news.ycombinator.com/' },
-      {
-        identifier:
-          'https://www.reuters.com/technology/artificial-intelligence/',
-      },
-      { identifier: 'https://simonwillison.net/' },
-      { identifier: 'https://buttondown.com/ainews/archive/' },
+      // { identifier: 'https://www.anthropic.com/news' },
+      // { identifier: 'https://news.ycombinator.com/' },
+      // {
+      //   identifier:
+      //     'https://www.reuters.com/technology/artificial-intelligence/',
+      // },
+      // { identifier: 'https://simonwillison.net/' },
+      // { identifier: 'https://buttondown.com/ainews/archive/' },
       { identifier: 'https://www.aibase.com/zh/daily' },
       { identifier: 'https://www.aibase.com/zh/news' },
     ],

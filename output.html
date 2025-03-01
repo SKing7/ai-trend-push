@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="zh">
+  <body class="zh">
+    <div id="__nuxt">
+      <!--[-->
+      <div
+        class="nuxt-loading-indicator"
+        style="
+          position: fixed;
+          top: 0px;
+          right: 0px;
+          left: 0px;
+          pointer-events: none;
+          width: auto;
+          height: 3px;
+          opacity: 0;
+          background: repeating-linear-gradient(
+            to right,
+            rgb(0, 220, 130) 0%,
+            rgb(52, 205, 254) 50%,
+            rgb(0, 71, 225) 100%
+          );
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition:
+            transform 0.1s,
+            height 0.4s,
+            opacity 0.4s;
+          z-index: 999999;
+        "
+      ></div>
+      <div>
+        <!--[--><!--[--><!--[-->
+        <div class="relative flex flex-col h-full w-full overflow-hidden">
+          <div>
+            <div
+              class="w-full z-50 bg-white sticky top-0 border-b h-[72px] border-gray-100"
+            >
+              <div
+                class="h-full md:px-6 px-4 flex items-center justify-center gap-6 relative"
+              >
+                <div
+                  class="flex items-center justify-center absolute left-5 md:left-6 top-4"
+                >
+                  <a href="https://www.aibase.com/zh/" class="md:mt-0 mt-1"
+                    ><img
+                      src="data:image/png;base64,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"
+                      alt="Aibase logo"
+                      class="h-7 flex-shrink-0 transition-transform duration-300"
+                  /></a>
+                  <div class="md:inline-block hidden ml-6">
+                    <div
+                      class="bg-second-100 rounded-full w-60 overflow-hidden flex items-center"
+                    >
+                      <div class="flex mx-3 text-surface-400">
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          class="fill-current w-6 h-6"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M4.1 11.06a6.95 6.95 0 1 1 13.9 0 6.95 6.95 0 0 1-13.9 0zm6.94-8.05a8.05 8.05 0 1 0 5.13 14.26l3.75 3.75a.56.56 0 1 0 .8-.79l-3.74-3.73A8.05 8.05 0 0 0 11.04 3v.01z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div>
+                      <input
+                        type="text"
+                        maxlength="20"
+                        autocomplete="off"
+                        class="pt-[10px] pb-[10px] text-sm pr-5 bg-transparent inline-flex focus-visible:outline-none"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </div>
+                <h2
+                  class="max-w-[680px] hidden md:flex items-center justify-center text-2xl font-bold"
+                >
+                  <span
+                    ><a href="https://www.aibase.com/zh/news" class=""
+                      >AI新闻资讯</a
+                    ></span
+                  >
+                </h2>
+                <div
+                  class="absolute md:right-6 right-5 top-4 flex items-center space-x-4"
+                >
+                  <div
+                    class="bg-surface-100 md:hidden flex w-10 h-10 rounded-full"
+                  >
+                    <button
+                      class="p-button p-component p-button-icon-only"
+                      type="button"
+                      data-pc-name="button"
+                      data-pc-section="root"
+                      data-pd-ripple="true"
+                    >
+                      <!--[--><!--[--><span
+                        class="p-button-icon pi pi-search"
+                        data-pc-section="icon"
+                      ></span
+                      ><!--]--><span
+                        class="p-button-label"
+                        data-pc-section="label"
+                        >&nbsp;</span
+                      ><!----><!--]--><span
+                        role="presentation"
+                        aria-hidden="true"
+                        data-p-ink="true"
+                        data-p-ink-active="false"
+                        class="p-ink"
+                        data-pc-name="ripple"
+                        data-pc-section="root"
+                      ></span>
+                    </button>
+                  </div>
+                  <div
+                    class="bg-surface-100 md:hidden flex w-10 h-10 rounded-full"
+                  >
+                    <button
+                      class="p-button p-component p-button-icon-only"
+                      type="button"
+                      data-pc-name="button"
+                      data-pc-section="root"
+                      data-pd-ripple="true"
+                    >
+                      <!--[--><!--[--><span
+                        class="p-button-icon pi pi-bars"
+                        data-pc-section="icon"
+                      ></span
+                      ><!--]--><span
+                        class="p-button-label"
+                        data-pc-section="label"
+                        >&nbsp;</span
+                      ><!----><!--]--><span
+                        role="presentation"
+                        aria-hidden="true"
+                        data-p-ink="true"
+                        data-p-ink-active="false"
+                        class="p-ink"
+                        data-pc-name="ripple"
+                        data-pc-section="root"
+                      ></span>
+                    </button>
+                  </div>
+                  <div class="h-full flex">
+                    <div
+                      class="relative group text-left md:mr-4 mr-0 hidden md:block"
+                    >
+                      <div class="languageSelect">
+                        <button
+                          type="button"
+                          class="inline-flex w-full justify-center items-center rounded-md py-2 text-base font-medium text-gray-1000 hover:text-brand-600"
+                        >
+                          <div class="icon-language">
+                            <span class="pi pi-globe"></span>
+                          </div>
+                          <span
+                            class="whitespace-nowrap truncate ml-2 uppercase"
+                            >zh</span
+                          ><svg
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            aria-hidden="true"
+                            class="-mr-1 ml-2 h-5 w-5"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                              clip-rule="evenodd"
+                            ></path>
+                          </svg>
+                        </button>
+                      </div>
+                      <!---->
+                    </div>
+                    <ul class="flex items-center h-full text-sm">
+                      <!--[-->
+                      <li class="hidden md:inline-block mr-4">
+                        <a
+                          href="https://www.aibase.com/zh/best-ai-tools/"
+                          rel="noopener"
+                          target="_blank"
+                          ><div
+                            class="px-3 rounded-lg h-9 flex items-center justify-center bg-red-500 text-white hover:bg-red-400"
+                          >
+                            <span class="pi pi-gift mr-2"></span> AI产品榜
+                          </div></a
+                        >
+                      </li>
+                      <!--]-->
+                      <li class="flex items-center">
+                        <div>
+                          <button
+                            class="p-button p-component p-button-icon-only w-10 h-10 bg-surface-100 rounded-full text-surface-800 hover:bg-surface-200"
+                            type="button"
+                            data-pc-name="button"
+                            data-pc-section="root"
+                            data-pd-ripple="true"
+                          >
+                            <!--[--><!--[--><span
+                              class="p-button-icon pi pi-user"
+                              data-pc-section="icon"
+                            ></span
+                            ><!--]--><span
+                              class="p-button-label"
+                              data-pc-section="label"
+                              >&nbsp;</span
+                            ><!----><!--]--><span
+                              role="presentation"
+                              aria-hidden="true"
+                              data-p-ink="true"
+                              data-p-ink-active="false"
+                              class="p-ink"
+                              data-pc-name="ripple"
+                              data-pc-section="root"
+                            ></span>
+                          </button>
+                        </div>
+                        <!---->
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-[#F9F9F9] hidden items-center justify-center py-3 relative"
+            >
+              <div class="flex items-center text-sm text-surface-500">
+                <svg
+                  viewBox="0 0 64 64"
+                  fill="none"
+                  role="presentation"
+                  aria-hidden="true"
+                  focusable="false"
+                  class="w-4 h-4 mr-2"
+                >
+                  <path
+                    d="M39.64 40.83L33.87 56.7a1.99 1.99 0 0 1-3.74 0l-5.77-15.87a2.02 2.02 0 0 0-1.2-1.2L7.3 33.88a1.99 1.99 0 0 1 0-3.74l15.87-5.77a2.02 2.02 0 0 0 1.2-1.2L30.12 7.3a1.99 1.99 0 0 1 3.74 0l5.77 15.87a2.02 2.02 0 0 0 1.2 1.2l15.86 5.76a1.99 1.99 0 0 1 0 3.74l-15.87 5.77a2.02 2.02 0 0 0-1.2 1.2z"
+                    fill="#FFC017"
+                  ></path>
+                </svg>
+                <div>
+                  每月不到10元，就可以无限制地访问最好的AIbase。立即成为会员
+                </div>
+              </div>
+              <div
+                class="absolute right-8 top-2 text-surface-500 hover:text-surface-800 cursor-pointer"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  class="w-6 h-6 fill-current"
+                >
+                  <path
+                    d="M5 5l7 7m7 7l-7-7m0 0l7-7m-7 7l-7 7"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex h-full max-w-full flex-1 flex-col overflow-hidden bg-white"
+          >
+            <div
+              class="relative h-full w-full flex-1 overflow-auto transition-width"
+            >
+              <div class="flex h-full flex-col focus-visible:outline-0">
+                <div class="flex-1 overflow-hidden">
+                  <div class="relative h-full">
+                    <div class="w-full h-full">
+                      <article>
+                        <div class="pb-32">
+                          <div
+                            class="max-w-[728px] tracking-wider mb-6 mx-auto flex flex-col flex-1"
+                          >
+                            <div class="px-4 flex flex-col mt-8 md:mt-16">
+                              <h1
+                                class="md:text-4xl text-3xl leading-[42px] md:leading-[48px] font-extrabold text-[#242424]"
+                              >
+                                百度网盘与百度文库全量上线DeepSeek-R1满血版
+                                前者将于3月改版
+                              </h1>
+                              <div class="flex items-center mt-8">
+                                <div
+                                  class="w-10 h-10 rounded-full overflow-hidden mr-4 flex-shrink-0"
+                                >
+                                  <img
+                                    class="object-cover h-full w-full"
+                                    src="https://app.aibase.com/icon/logo.png"
+                                    alt="aibase"
+                                  />
+                                </div>
+                                <div class="flex flex-col">
+                                  <h4 class="text-surface-600">AIbase基地</h4>
+                                  <div
+                                    class="flex items-center flex-wrap text-sm text-surface-500"
+                                  >
+                                    <span class="mr-1">发布于</span
+                                    ><a
+                                      href="https://www.aibase.com/zh/news/"
+                                      class="text-surface-700"
+                                      target="_blank"
+                                      >AI新闻资讯</a
+                                    ><span class="mx-2 inline-block"> · </span
+                                    ><span>1 分钟阅读</span
+                                    ><span class="mx-2 inline-block"> · </span
+                                    ><span>2025年2月27号 22:57</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                class="flex items-center justify-between mt-8 border-t border-b py-3.5 px-2 border-surface-100"
+                              >
+                                <div
+                                  class="flex-1 flex items-center text-gray-500 text-sm space-x-6"
+                                >
+                                  <div
+                                    class="inline-flex items-center text-surface-500"
+                                    aria-label="views"
+                                  >
+                                    <svg
+                                      width="24"
+                                      height="24"
+                                      viewBox="0 0 24 24"
+                                      aria-label="clap"
+                                      class="w-6 h-6 mr-1 fill-current"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M11.37.83L12 3.28l.63-2.45h-1.26zM13.92 3.95l1.52-2.1-1.18-.4-.34 2.5zM8.59 1.84l1.52 2.11-.34-2.5-1.18.4zM18.52 18.92a4.23 4.23 0 0 1-2.62 1.33l.41-.37c2.39-2.4 2.86-4.95 1.4-7.63l-.91-1.6-.8-1.67c-.25-.56-.19-.98.21-1.29a.7.7 0 0 1 .55-.13c.28.05.54.23.72.5l2.37 4.16c.97 1.62 1.14 4.23-1.33 6.7zm-11-.44l-4.15-4.15a.83.83 0 0 1 1.17-1.17l2.16 2.16a.37.37 0 0 0 .51-.52l-2.15-2.16L3.6 11.2a.83.83 0 0 1 1.17-1.17l3.43 3.44a.36.36 0 0 0 .52 0 .36.36 0 0 0 0-.52L5.29 9.51l-.97-.97a.83.83 0 0 1 0-1.16.84.84 0 0 1 1.17 0l.97.97 3.44 3.43a.36.36 0 0 0 .51 0 .37.37 0 0 0 0-.52L6.98 7.83a.82.82 0 0 1-.18-.9.82.82 0 0 1 .76-.51c.22 0 .43.09.58.24l5.8 5.79a.37.37 0 0 0 .58-.42L13.4 9.67c-.26-.56-.2-.98.2-1.29a.7.7 0 0 1 .55-.13c.28.05.55.23.73.5l2.2 3.86c1.3 2.38.87 4.59-1.29 6.75a4.65 4.65 0 0 1-4.19 1.37 7.73 7.73 0 0 1-4.07-2.25zm3.23-12.5l2.12 2.11c-.41.5-.47 1.17-.13 1.9l.22.46-3.52-3.53a.81.81 0 0 1-.1-.36c0-.23.09-.43.24-.59a.85.85 0 0 1 1.17 0zm7.36 1.7a1.86 1.86 0 0 0-1.23-.84 1.44 1.44 0 0 0-1.12.27c-.3.24-.5.55-.58.89-.25-.25-.57-.4-.91-.47-.28-.04-.56 0-.82.1l-2.18-2.18a1.56 1.56 0 0 0-2.2 0c-.2.2-.33.44-.4.7a1.56 1.56 0 0 0-2.63.75 1.6 1.6 0 0 0-2.23-.04 1.56 1.56 0 0 0 0 2.2c-.24.1-.5.24-.72.45a1.56 1.56 0 0 0 0 2.2l.52.52a1.56 1.56 0 0 0-.75 2.61L7 19a8.46 8.46 0 0 0 4.48 2.45 5.18 5.18 0 0 0 3.36-.5 4.89 4.89 0 0 0 4.2-1.51c2.75-2.77 2.54-5.74 1.43-7.59L18.1 7.68z"
+                                      ></path></svg
+                                    ><span>160</span>
+                                  </div>
+                                </div>
+                                <div
+                                  class="flex items-center space-x-2 text-surface-500 hover:text-surface-800"
+                                >
+                                  <button
+                                    class="p-button p-component p-button-icon-only"
+                                    type="button"
+                                    data-pc-name="button"
+                                    data-pc-section="root"
+                                    data-pd-tooltip="true"
+                                    data-pd-ripple="true"
+                                  >
+                                    <!--[--><!--[--><span
+                                      class="p-button-icon pi pi-share-alt"
+                                      data-pc-section="icon"
+                                    ></span
+                                    ><!--]--><span
+                                      class="p-button-label"
+                                      data-pc-section="label"
+                                      >&nbsp;</span
+                                    ><!----><!--]--><span
+                                      role="presentation"
+                                      aria-hidden="true"
+                                      data-p-ink="true"
+                                      data-p-ink-active="false"
+                                      class="p-ink"
+                                      data-pc-name="ripple"
+                                      data-pc-section="root"
+                                    ></span></button
+                                  ><button
+                                    class="p-button p-component p-button-icon-only"
+                                    type="button"
+                                    data-pc-name="button"
+                                    data-pc-section="root"
+                                    data-pd-tooltip="true"
+                                    data-pd-ripple="true"
+                                  >
+                                    <!--[--><!--[--><span
+                                      class="p-button-icon pi pi-exclamation-circle"
+                                      data-pc-section="icon"
+                                    ></span
+                                    ><!--]--><span
+                                      class="p-button-label"
+                                      data-pc-section="label"
+                                      >&nbsp;</span
+                                    ><!----><!--]--><span
+                                      role="presentation"
+                                      aria-hidden="true"
+                                      data-p-ink="true"
+                                      data-p-ink-active="false"
+                                      class="p-ink"
+                                      data-pc-name="ripple"
+                                      data-pc-section="root"
+                                    ></span>
+                                  </button>
+                                </div>
+                              </div>
+                              <div>
+                                <div
+                                  class="leading-8 text-[#242424] post-content mt-12 text-lg space-y-7"
+                                >
+                                  <p>
+                                    <span style="text-indent: 2em"
+                                      >2月28日，百度网盘与百度文库宣布全量上线DeepSeek-R1满血版，这一创新举措标志着行业<span
+                                        class="spamTxt"
+                                        >首次</span
+                                      >实现了一站式“深度思考+深度交付”的能力。</span
+                                    >
+                                  </p>
+                                  <p style="text-align: center">
+                                    <span style="text-indent: 2em"
+                                      ><img
+                                        src="https://upload.chinaz.com/2025/0228/6387635859607823645476657.png"
+                                        title="微信截图_20250228165527.png"
+                                        alt="微信截图_20250228165527.png"
+                                    /></span>
+                                  </p>
+                                  <p>
+                                    用户在百度网盘PC端、APP端的智能助理“云一朵”，以及百度文库PC端、APP端的“智能助手”中，只需点亮“DeepSeek-R1满血版”功能，即可立即体验这一全新升级。在百度文库平台上，DeepSeek-R1模型深度赋能了AI对话搜索、PPT生成以及AI有声画本等多项功能。值得一提的是，这是智能PPT<span
+                                      class="spamTxt"
+                                      >首次</span
+                                    >无缝接入DeepSeek技术，它能够基于深度思考过程生成PPT大纲，并一键完成PPT的制作，极大地提升了用户的工作效率。
+                                  </p>
+                                  <p>
+                                    与此同时，百度网盘与百度文库联合推出的自由画布也在28日全量上线。在自由画布上，用户可以享受到DeepSeek-R1满血版带来的长文撰写、AI对话等多功能体验。未来，百度文库的智能研报、漫画、小说、海报等全模态能力也将逐步接入DeepSeek-R1模型，为用户带来更加全面、智能的服务。
+                                  </p>
+                                  <p>
+                                    此外，百度网盘还计划在3月进行全面改版，推出一系列全新的AI功能。DeepSeek-R1模型将全面赋能网盘AI总结、AI创作、AI内容消费等功能及场景，为用户提供更加丰富、智能的使用体验。
+                                  </p>
+                                </div>
+                              </div>
+                              <div class="my-8 flex space-x-3">
+                                <!--[--><a
+                                  href="https://www.aibase.com/zh/search/DeepSeek-R1&amp;type=0"
+                                  class="tag-badge mb-4 cursor-pointer text-sm hover:bg-slate-200 bg-slate-100 text-slate-800 rounded inline-block py-1 px-2"
+                                  >DeepSeek-R1</a
+                                ><a
+                                  href="https://www.aibase.com/zh/search/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98&amp;type=0"
+                                  class="tag-badge mb-4 cursor-pointer text-sm hover:bg-slate-200 bg-slate-100 text-slate-800 rounded inline-block py-1 px-2"
+                                  >百度网盘</a
+                                ><a
+                                  href="https://www.aibase.com/zh/search/%E7%99%BE%E5%BA%A6%E6%96%87%E5%BA%93&amp;type=0"
+                                  class="tag-badge mb-4 cursor-pointer text-sm hover:bg-slate-200 bg-slate-100 text-slate-800 rounded inline-block py-1 px-2"
+                                  >百度文库</a
+                                ><a
+                                  href="https://www.aibase.com/zh/search/AI%E5%AF%B9%E8%AF%9D%E6%90%9C%E7%B4%A2&amp;type=0"
+                                  class="tag-badge mb-4 cursor-pointer text-sm hover:bg-slate-200 bg-slate-100 text-slate-800 rounded inline-block py-1 px-2"
+                                  >AI对话搜索</a
+                                ><!--]--><!---->
+                              </div>
+                              <div class="text-gray-600 text-xs mt-12">
+                                © 版权所有 AIbase基地 2024, 点击查看来源出处 -
+                                https://www.aibase.com/zh/news/15846
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                      <div class="border-t border-surface-100 bg-surface-50">
+                        <div
+                          class="max-w-[728px] tracking-wider mb-6 mx-auto flex flex-col flex-1"
+                        >
+                          <div class="p-4">
+                            <div
+                              class="flex items-center justify-between pt-16 pb-10 text-sm font-semibold text-gray-900"
+                            >
+                              <h3 class="text-xl">相关AI新闻推荐</h3>
+                            </div>
+                            <div
+                              class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6"
+                            >
+                              <!--[--><a
+                                href="https://www.aibase.com/zh/news/15814"
+                                class="pb-8 overflow-hidden"
+                                ><div class="relative h-40 bg-slate-100">
+                                  <img
+                                    src="https://pic.chinaz.com/picmap/202502051558211433_3.jpg"
+                                    alt="第三方平台 DeepSeek-R1 稳定性测评：性能差异引发热议"
+                                    class="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <div class="pt-6">
+                                  <div class="block group">
+                                    <h2
+                                      class="text-xl font-bold line-clamp-2 mb-2 group-hover:underline"
+                                    >
+                                      第三方平台 DeepSeek-R1
+                                      稳定性测评：性能差异引发热议
+                                    </h2>
+                                    <p
+                                      class="text-slate-600 line-clamp-2 text-sm"
+                                    >
+                                      随着中国 AI 公司 DeepSeek 推出的推理模型
+                                      DeepSeek-R1在全球范围内受到关注，其在第三方平台的稳定性表现成为近期科技圈的热门话题。根据
+                                      X
+                                      平台上的最新讨论和评测数据，DeepSeek-R1在不同托管平台上的性能差异显著，完整性、准确性和推理时间因平台选择而异。这一现象不仅揭示了模型部署的复杂性，也为用户选择适合的托管服务提供了重要参考。测试背景与方法根据
+                                      X 用户和专业评测机构的反馈，近期一项针对
+                                      DeepSeek-R1的跨平台稳定性测试引发了广泛关注。测试由中国软件评测中心人工
+                                    </p>
+                                  </div>
+                                </div>
+                                <div
+                                  class="py-3 flex items-center justify-between"
+                                >
+                                  <div
+                                    class="flex items-center gap-4 text-sm text-surface-500"
+                                  >
+                                    <span>2025年2月28号</span>
+                                    <div
+                                      class="inline-flex items-center text-surface-500"
+                                      aria-label="views"
+                                    >
+                                      <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        aria-label="clap"
+                                        class="w-6 h-6 mr-1 fill-current"
+                                      >
+                                        <path
+                                          fill-rule="evenodd"
+                                          clip-rule="evenodd"
+                                          d="M11.37.83L12 3.28l.63-2.45h-1.26zM13.92 3.95l1.52-2.1-1.18-.4-.34 2.5zM8.59 1.84l1.52 2.11-.34-2.5-1.18.4zM18.52 18.92a4.23 4.23 0 0 1-2.62 1.33l.41-.37c2.39-2.4 2.86-4.95 1.4-7.63l-.91-1.6-.8-1.67c-.25-.56-.19-.98.21-1.29a.7.7 0 0 1 .55-.13c.28.05.54.23.72.5l2.37 4.16c.97 1.62 1.14 4.23-1.33 6.7zm-11-.44l-4.15-4.15a.83.83 0 0 1 1.17-1.17l2.16 2.16a.37.37 0 0 0 .51-.52l-2.15-2.16L3.6 11.2a.83.83 0 0 1 1.17-1.17l3.43 3.44a.36.36 0 0 0 .52 0 .36.36 0 0 0 0-.52L5.29 9.51l-.97-.97a.83.83 0 0 1 0-1.16.84.84 0 0 1 1.17 0l.97.97 3.44 3.43a.36.36 0 0 0 .51 0 .37.37 0 0 0 0-.52L6.98 7.83a.82.82 0 0 1-.18-.9.82.82 0 0 1 .76-.51c.22 0 .43.09.58.24l5.8 5.79a.37.37 0 0 0 .58-.42L13.4 9.67c-.26-.56-.2-.98.2-1.29a.7.7 0 0 1 .55-.13c.28.05.55.23.73.5l2.2 3.86c1.3 2.38.87 4.59-1.29 6.75a4.65 4.65 0 0 1-4.19 1.37 7.73 7.73 0 0 1-4.07-2.25zm3.23-12.5l2.12 2.11c-.41.5-.47 1.17-.13 1.9l.22.46-3.52-3.53a.81.81 0 0 1-.1-.36c0-.23.09-.43.24-.59a.85.85 0 0 1 1.17 0zm7.36 1.7a1.86 1.86 0 0 0-1.23-.84 1.44 1.44 0 0 0-1.12.27c-.3.24-.5.55-.58.89-.25-.25-.57-.4-.91-.47-.28-.04-.56 0-.82.1l-2.18-2.18a1.56 1.56 0 0 0-2.2 0c-.2.2-.33.44-.4.7a1.56 1.56 0 0 0-2.63.75 1.6 1.6 0 0 0-2.23-.04 1.56 1.56 0 0 0 0 2.2c-.24.1-.5.24-.72.45a1.56 1.56 0 0 0 0 2.2l.52.52a1.56 1.56 0 0 0-.75 2.61L7 19a8.46 8.46 0 0 0 4.48 2.45 5.18 5.18 0 0 0 3.36-.5 4.89 4.89 0 0 0 4.2-1.51c2.75-2.77 2.54-5.74 1.43-7.59L18.1 7.68z"
+                                        ></path></svg
+                                      ><span>1.2k</span>
+                                    </div>
+                                  </div>
+                                </div></a
+                              ><a
+                                href="https://www.aibase.com/zh/news/15799"
+                                class="pb-8 overflow-hidden"
+                                ><div class="relative h-40 bg-slate-100">
+                                  <img
+                                    src="https://pic.chinaz.com/picmap/thumb/202305291455510902_2.jpg"
+                                    alt="脉脉接入DeepSeek-R1模型，AI招聘全面提升人岗匹配效率"
+                                    class="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <div class="pt-6">
+                                  <div class="block group">
+                                    <h2
+                                      class="text-xl font-bold line-clamp-2 mb-2 group-hover:underline"
+                                    >
+                                      脉脉接入DeepSeek-R1模型，AI招聘全面提升人岗匹配效率
+                                    </h2>
+                                    <p
+                                      class="text-slate-600 line-clamp-2 text-sm"
+                                    >
+                                      职场社区平台脉脉近日宣布已成功接入DeepSeek-R1模型，此举旨在进一步优化人岗匹配效率，全面提升招聘流程智能化水平。据悉，脉脉早在今年2月初便开始部署该模型，并已完成相关测试工作。目前，AI技术已深度赋能脉脉的整体招聘工作流，在求职信号捕捉、投递过滤、自动追问、智能打招呼等多个关键环节实现了显著的效能提升。在人才评估阶段，系统能够动态追踪用户行为并解析多维数据，通过算法优化实现精准匹配;投递后自动完成智能初筛，触发追问以补充关键信息;同时基于兴趣
+                                    </p>
+                                  </div>
+                                </div>
+                                <div
+                                  class="py-3 flex items-center justify-between"
+                                >
+                                  <div
+                                    class="flex items-center gap-4 text-sm text-surface-500"
+                                  >
+                                    <span>2025年2月27号</span>
+                                    <div
+                                      class="inline-flex items-center text-surface-500"
+                                      aria-label="views"
+                                    >
+                                      <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        aria-label="clap"
+                                        class="w-6 h-6 mr-1 fill-current"
+                                      >
+                                        <path
+                                          fill-rule="evenodd"
+                                          clip-rule="evenodd"
+                                          d="M11.37.83L12 3.28l.63-2.45h-1.26zM13.92 3.95l1.52-2.1-1.18-.4-.34 2.5zM8.59 1.84l1.52 2.11-.34-2.5-1.18.4zM18.52 18.92a4.23 4.23 0 0 1-2.62 1.33l.41-.37c2.39-2.4 2.86-4.95 1.4-7.63l-.91-1.6-.8-1.67c-.25-.56-.19-.98.21-1.29a.7.7 0 0 1 .55-.13c.28.05.54.23.72.5l2.37 4.16c.97 1.62 1.14 4.23-1.33 6.7zm-11-.44l-4.15-4.15a.83.83 0 0 1 1.17-1.17l2.16 2.16a.37.37 0 0 0 .51-.52l-2.15-2.16L3.6 11.2a.83.83 0 0 1 1.17-1.17l3.43 3.44a.36.36 0 0 0 .52 0 .36.36 0 0 0 0-.52L5.29 9.51l-.97-.97a.83.83 0 0 1 0-1.16.84.84 0 0 1 1.17 0l.97.97 3.44 3.43a.36.36 0 0 0 .51 0 .37.37 0 0 0 0-.52L6.98 7.83a.82.82 0 0 1-.18-.9.82.82 0 0 1 .76-.51c.22 0 .43.09.58.24l5.8 5.79a.37.37 0 0 0 .58-.42L13.4 9.67c-.26-.56-.2-.98.2-1.29a.7.7 0 0 1 .55-.13c.28.05.55.23.73.5l2.2 3.86c1.3 2.38.87 4.59-1.29 6.75a4.65 4.65 0 0 1-4.19 1.37 7.73 7.73 0 0 1-4.07-2.25zm3.23-12.5l2.12 2.11c-.41.5-.47 1.17-.13 1.9l.22.46-3.52-3.53a.81.81 0 0 1-.1-.36c0-.23.09-.43.24-.59a.85.85 0 0 1 1.17 0zm7.36 1.7a1.86 1.86 0 0 0-1.23-.84 1.44 1.44 0 0 0-1.12.27c-.3.24-.5.55-.58.89-.25-.25-.57-.4-.91-.47-.28-.04-.56 0-.82.1l-2.18-2.18a1.56 1.56 0 0 0-2.2 0c-.2.2-.33.44-.4.7a1.56 1.56 0 0 0-2.63.75 1.6 1.6 0 0 0-2.23-.04 1.56 1.56 0 0 0 0 2.2c-.24.1-.5.24-.72.45a1.56 1.56 0 0 0 0 2.2l.52.52a1.56 1.56 0 0 0-.75 2.61L7 19a8.46 8.46 0 0 0 4.48 2.45 5.18 5.18 0 0 0 3.36-.5 4.89 4.89 0 0 0 4.2-1.51c2.75-2.77 2.54-5.74 1.43-7.59L18.1 7.68z"
+                                        ></path></svg
+                                      ><span>1.4k</span>
+                                    </div>
+                                  </div>
+                                </div></a
+                              ><a
+                                href="https://www.aibase.com/zh/news/15741"
+                                class="pb-8 overflow-hidden"
+                                ><div class="relative h-40 bg-slate-100">
+                                  <img
+                                    src="https://pic.chinaz.com/picmap/thumb/201811151639391453_17.jpg"
+                                    alt="支持联网搜索！OPPO ColorOS接入满血版DeepSeek-R1"
+                                    class="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <div class="pt-6">
+                                  <div class="block group">
+                                    <h2
+                                      class="text-xl font-bold line-clamp-2 mb-2 group-hover:underline"
+                                    >
+                                      支持联网搜索！OPPO
+                                      ColorOS接入满血版DeepSeek-R1
+                                    </h2>
+                                    <p
+                                      class="text-slate-600 line-clamp-2 text-sm"
+                                    >
+                                      今日，ColorOS官方宣布了一项重要更新，即正式接入满血版DeepSeek-R1推理模型。此次更新覆盖了包括OPPO
+                                      Find
+                                      N5在内的40款OPPO/一加机型，让用户能够率先体验到这一先进技术的魅力。
+                                    </p>
+                                  </div>
+                                </div>
+                                <div
+                                  class="py-3 flex items-center justify-between"
+                                >
+                                  <div
+                                    class="flex items-center gap-4 text-sm text-surface-500"
+                                  >
+                                    <span>2025年2月26号</span>
+                                    <div
+                                      class="inline-flex items-center text-surface-500"
+                                      aria-label="views"
+                                    >
+                                      <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        aria-label="clap"
+                                        class="w-6 h-6 mr-1 fill-current"
+                                      >
+                                        <path
+                                          fill-rule="evenodd"
+                                          clip-rule="evenodd"
+                                          d="M11.37.83L12 3.28l.63-2.45h-1.26zM13.92 3.95l1.52-2.1-1.18-.4-.34 2.5zM8.59 1.84l1.52 2.11-.34-2.5-1.18.4zM18.52 18.92a4.23 4.23 0 0 1-2.62 1.33l.41-.37c2.39-2.4 2.86-4.95 1.4-7.63l-.91-1.6-.8-1.67c-.25-.56-.19-.98.21-1.29a.7.7 0 0 1 .55-.13c.28.05.54.23.72.5l2.37 4.16c.97 1.62 1.14 4.23-1.33 6.7zm-11-.44l-4.15-4.15a.83.83 0 0 1 1.17-1.17l2.16 2.16a.37.37 0 0 0 .51-.52l-2.15-2.16L3.6 11.2a.83.83 0 0 1 1.17-1.17l3.43 3.44a.36.36 0 0 0 .52 0 .36.36 0 0 0 0-.52L5.29 9.51l-.97-.97a.83.83 0 0 1 0-1.16.84.84 0 0 1 1.17 0l.97.97 3.44 3.43a.36.36 0 0 0 .51 0 .37.37 0 0 0 0-.52L6.98 7.83a.82.82 0 0 1-.18-.9.82.82 0 0 1 .76-.51c.22 0 .43.09.58.24l5.8 5.79a.37.37 0 0 0 .58-.42L13.4 9.67c-.26-.56-.2-.98.2-1.29a.7.7 0 0 1 .55-.13c.28.05.55.23.73.5l2.2 3.86c1.3 2.38.87 4.59-1.29 6.75a4.65 4.65 0 0 1-4.19 1.37 7.73 7.73 0 0 1-4.07-2.25zm3.23-12.5l2.12 2.11c-.41.5-.47 1.17-.13 1.9l.22.46-3.52-3.53a.81.81 0 0 1-.1-.36c0-.23.09-.43.24-.59a.85.85 0 0 1 1.17 0zm7.36 1.7a1.86 1.86 0 0 0-1.23-.84 1.44 1.44 0 0 0-1.12.27c-.3.24-.5.55-.58.89-.25-.25-.57-.4-.91-.47-.28-.04-.56 0-.82.1l-2.18-2.18a1.56 1.56 0 0 0-2.2 0c-.2.2-.33.44-.4.7a1.56 1.56 0 0 0-2.63.75 1.6 1.6 0 0 0-2.23-.04 1.56 1.56 0 0 0 0 2.2c-.24.1-.5.24-.72.45a1.56 1.56 0 0 0 0 2.2l.52.52a1.56 1.56 0 0 0-.75 2.61L7 19a8.46 8.46 0 0 0 4.48 2.45 5.18 5.18 0 0 0 3.36-.5 4.89 4.89 0 0 0 4.2-1.51c2.75-2.77 2.54-5.74 1.43-7.59L18.1 7.68z"
+                                        ></path></svg
+                                      ><span>1.5k</span>
+                                    </div>
+                                  </div>
+                                </div></a
+                              ><a
+                                href="https://www.aibase.com/zh/news/15714"
+                                class="pb-8 overflow-hidden"
+                                ><div class="relative h-40 bg-slate-100">
+                                  <img
+                                    src="https://pic.chinaz.com/picmap/thumb/202306271641504183_0.jpg"
+                                    alt="360智脑发布Tiny-R1-32B：5%参数逼近Deepseek-R1满血性能"
+                                    class="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <div class="pt-6">
+                                  <div class="block group">
+                                    <h2
+                                      class="text-xl font-bold line-clamp-2 mb-2 group-hover:underline"
+                                    >
+                                      360智脑发布Tiny-R1-32B：5%参数逼近Deepseek-R1满血性能
+                                    </h2>
+                                    <p
+                                      class="text-slate-600 line-clamp-2 text-sm"
+                                    >
+                                      360智脑团队与北京大学联合研发的中等量级推理模型
+                                      Tiny-R1-32B-Preview
+                                      正式发布。这一模型仅以5%的参数量，成功逼近了
+                                      Deepseek-R1-671B
+                                      的满血性能，展现了小模型在高效推理领域的巨大潜力。该模型在多个关键领域的表现尤为突出。在数学领域，Tiny-R1-32B-Preview
+                                    </p>
+                                  </div>
+                                </div>
+                                <div
+                                  class="py-3 flex items-center justify-between"
+                                >
+                                  <div
+                                    class="flex items-center gap-4 text-sm text-surface-500"
+                                  >
+                                    <span>2025年2月26号</span>
+                                    <div
+                                      class="inline-flex items-center text-surface-500"
+                                      aria-label="views"
+                                    >
+                                      <svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        aria-label="clap"
+                                        class="w-6 h-6 mr-1 fill-current"
+                                      >
+                                        <path
+                                          fill-rule="evenodd"
+                                          clip-rule="evenodd"
+                                          d="M11.37.83L12 3.28l.63-2.45h-1.26zM13.92 3.95l1.52-2.1-1.18-.4-.34 2.5zM8.59 1.84l1.52 2.11-.34-2.5-1.18.4zM18.52 18.92a4.23 4.23 0 0 1-2.62 1.33l.41-.37c2.39-2.4 2.86-4.95 1.4-7.63l-.91-1.6-.8-1.67c-.25-.56-.19-.98.21-1.29a.7.7 0 0 1 .55-.13c.28.05.54.23.72.5l2.37 4.16c.97 1.62 1.14 4.23-1.33 6.7zm-11-.44l-4.15-4.15a.83.83 0 0 1 1.17-1.17l2.16 2.16a.37.37 0 0 0 .51-.52l-2.15-2.16L3.6 11.2a.83.83 0 0 1 1.17-1.17l3.43 3.44a.36.36 0 0 0 .52 0 .36.36 0 0 0 0-.52L5.29 9.51l-.97-.97a.83.83 0 0 1 0-1.16.84.84 0 0 1 1.17 0l.97.97 3.44 3.43a.36.36 0 0 0 .51 0 .37.37 0 0 0 0-.52L6.98 7.83a.82.82 0 0 1-.18-.9.82.82 0 0 1 .76-.51c.22 0 .43.09.58.24l5.8 5.79a.37.37 0 0 0 .58-.42L13.4 9.67c-.26-.56-.2-.98.2-1.29a.7.7 0 0 1 .55-.13c.28.05.55.23.73.5l2.2 3.86c1.3 2.38.87 4.59-1.29 6.75a4.65 4.65 0 0 1-4.19 1.37 7.73 7.73 0 0 1-4.07-2.25zm3.23-12.5l2.12 2.11c-.41.5-.47 1.17-.13 1.9l.22.46-3.52-3.53a.81.81 0 0 1-.1-.36c0-.23.09-.43.24-.59a.85.85 0 0 1 1.17 0zm7.36 1.7a1.86 1.86 0 0 0-1.23-.84 1.44 1.44 0 0 0-1.12.27c-.3.24-.5.55-.58.89-.25-.25-.57-.4-.91-.47-.28-.04-.56 0-.82.1l-2.18-2.18a1.56 1.56 0 0 0-2.2 0c-.2.2-.33.44-.4.7a1.56 1.56 0 0 0-2.63.75 1.6 1.6 0 0 0-2.23-.04 1.56 1.56 0 0 0 0 2.2c-.24.1-.5.24-.72.45a1.56 1.56 0 0 0 0 2.2l.52.52a1.56 1.56 0 0 0-.75 2.61L7 19a8.46 8.46 0 0 0 4.48 2.45 5.18 5.18 0 0 0 3.36-.5 4.89 4.89 0 0 0 4.2-1.51c2.75-2.77 2.54-5.74 1.43-7.59L18.1 7.68z"
+                                        ></path></svg
+                                      ><span>6.0k</span>
+                                    </div>
+                                  </div>
+                                </div></a
+                              ><!--]-->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--]--><!--]--><!--]-->
+      </div>
+      <!--]-->
+    </div>
+    <div id="teleports"></div>
+    <!---->
+  </body>
+</html>

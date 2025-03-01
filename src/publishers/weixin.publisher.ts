@@ -19,7 +19,9 @@ export class WeixinPublisher {
   private appId: string | undefined;
   private appSecret: string | undefined;
 
-  constructor() {}
+  constructor() {
+    this.init();
+  }
 
   init() {
     const configService = getConfigService();
@@ -67,6 +69,7 @@ export class WeixinPublisher {
     title: string,
     digest: string,
     mediaId: string,
+    originalUrl: string,
   ): Promise<WeixinDraft> {
     const token = await this.ensureAccessToken();
     const url = `https://api.weixin.qq.com/cgi-bin/draft/add?access_token=${token}`;
@@ -78,8 +81,9 @@ export class WeixinPublisher {
         digest: digest,
         content: article,
         thumb_media_id: mediaId,
-        need_open_comment: 1,
+        need_open_comment: 0,
         only_fans_can_comment: 0,
+        content_source_url: originalUrl,
       },
     ];
 
@@ -157,10 +161,19 @@ export class WeixinPublisher {
     title: string,
     digest: string,
     mediaId: string,
+    originalUrl: string,
   ): Promise<PublishResult> {
     try {
       // 上传草稿
-      const draft = await this.uploadDraft(article, title, digest, mediaId);
+      console.log('上传草稿 start');
+      const draft = await this.uploadDraft(
+        article,
+        title,
+        digest,
+        mediaId,
+        originalUrl,
+      );
+      console.log('上传草稿 success');
       return {
         publishId: draft.media_id,
         status: 'draft',
